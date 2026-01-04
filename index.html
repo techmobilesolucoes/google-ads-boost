@@ -577,6 +577,32 @@ footer{
   .whatsapp-float svg,
   .whatsapp-float .whatsapp-icon{width:26px;height:26px}
 }
+
+.review-button{
+  display: inline-block;
+  margin-top: 12px;
+  padding: 14px 26px;
+  background: #1a73e8; /* azul Google */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 16px rgba(26,115,232,0.35);
+}
+
+.review-button:hover{
+  background: #1558b0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(26,115,232,0.45);
+}
+
+.review-button:active{
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(26,115,232,0.35);
+}
+
 </style>
 </head>
 
@@ -752,31 +778,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <!-- BLOCO CENTRAL DE AVALIAÇÃO GOOGLE -->
   <div class="google-review-box">
-    <p>
-      Já utilizou nossos serviços?<br>
-      <strong>Escaneie o QR Code e avalie a Tech Mobile Floripa no Google</strong>
-    </p>
+  <p>
+    Já utilizou nossos serviços?<br>
+    <strong>Escaneie o QR Code e avalie a Tech Mobile Floripa no Google</strong>
+  </p>
 
-    <img
-      src="https://github.com/techmobilesolucoes/Home/blob/main/qr%20code%20avalia%C3%A7%C3%A3o%20do%20google.png?raw=true"
-      alt="QR Code para avaliação no Google da Tech Mobile Floripa"
-      loading="lazy"
-      decoding="async"
-      width="160"
-      height="160"
-    >
+  <img
+    src="https://github.com/techmobilesolucoes/Home/blob/main/qr%20code%20avalia%C3%A7%C3%A3o%20do%20google.png?raw=true"
+    alt="QR Code para avaliação no Google da Tech Mobile Floripa"
+    loading="lazy"
+    decoding="async"
+    width="160"
+    height="160"
+  >
 
-    <span class="review-divider">Ou</span>
+  <a
+    href="https://g.page/r/CZaiGYPVZQ7YEBM/review"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="review-button"
+    role="button"
+    aria-label="Avaliar a Tech Mobile Floripa no Google"
+  >
+    Avaliar no Google ⭐
+  </a>
+</div>
 
-    <a
-      href="https://g.page/r/CZaiGYPVZQ7YEBM/review"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="review-link"
-    >
-      Clique aqui para avaliar
-    </a>
-  </div>
 
   <!-- GRID DE DEPOIMENTOS -->
   <div class="grid">
