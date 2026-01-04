@@ -1,169 +1,314 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Assistência Técnica Independente em Celulares e Notebooks</title>
+<title>Assistência Técnica Independente | Atendimento Rápido</title>
 
-  <meta name="description" content="Assistência técnica independente em celulares, notebooks e computadores. Manutenção, troca de peças e atendimento via WhatsApp.">
+<meta name="description" content="Assistência técnica independente em celulares e notebooks. Atendimento rápido via WhatsApp.">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Assistência Técnica Independente">
-  <meta property="og:description" content="Manutenção e reparos em celulares e notebooks. Atendimento rápido e profissional.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/techmobilesolucoes/paginacapturawhatsapp/refs/heads/main/frente%20cartao.jpeg">
-  <meta property="og:type" content="website">
+<!-- Open Graph -->
+<meta property="og:title" content="Assistência Técnica Independente">
+<meta property="og:description" content="Manutenção e reparos com atendimento rápido.">
+<meta property="og:type" content="website">
 
-  <!-- Schema.org (SEM marcas) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Tech Mobile",
-    "telephone": "+5548998049084",
-    "description": "Assistência técnica independente para celulares, notebooks e computadores.",
-    "image": "https://raw.githubusercontent.com/techmobilesolucoes/paginacapturawhatsapp/refs/heads/main/frente%20cartao.jpeg"
-  }
-  </script>
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Tech Mobile",
+  "telephone":"+5548998049084",
+  "description":"Assistência técnica independente em celulares e notebooks.",
+}
+</script>
 
-  <style>
-    :root{
-      --bg:#07120f;
-      --panel:rgba(2,6,8,.72);
-      --text:#ffffff;
-      --accent:#00a896;
-      --whatsapp:#25D366;
-      --radius:14px;
-    }
+<style>
+:root{
+  --bg:#07120f;
+  --panel:rgba(5,14,18,.78);
+  --text:#ffffff;
+  --accent:#00a896;
+  --accent-soft:rgba(0,168,150,.25);
+  --whatsapp:#25D366;
+  --radius:18px;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
+*{box-sizing:border-box}
 
-    .container{
-      max-width:1100px;
-      margin:auto;
-      padding:20px;
-    }
+html{scroll-behavior:smooth}
 
-    .banner{
-      height:300px;
-      background:url('https://raw.githubusercontent.com/techmobilesolucoes/paginacapturawhatsapp/refs/heads/main/frente%20cartao.jpeg') center/cover no-repeat;
-      border-radius:12px;
-      margin-bottom:20px;
-    }
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(0,168,150,.12), transparent),
+    radial-gradient(1000px 500px at 80% 10%, rgba(37,211,102,.08), transparent),
+    var(--bg);
+  color:var(--text);
+}
 
-    .panel{
-      max-width:880px;
-      margin:auto;
-      background:var(--panel);
-      padding:28px;
-      border-radius:var(--radius);
-      box-shadow:0 10px 40px rgba(0,0,0,.45);
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    h2{text-align:center;margin-bottom:20px}
+/* HERO */
+.hero{
+  position:relative;
+  background:url('https://www.ccbc.org.br/wp-content/uploads/2019/09/comiss%C3%A3o-de-tecnologia-ccbc-planos-1080x389.jpg') center/cover no-repeat;
+  border-radius:22px;
+  padding:56px 24px;
+  overflow:hidden;
+}
 
-    .services{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.85));
+}
 
-    .service h3{text-align:center}
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:760px;
+  margin:auto;
+  text-align:center;
+  animation:fadeUp .9s ease forwards;
+}
 
-    ul{list-style:none;padding:0}
-    li{
-      background:rgba(255,255,255,.04);
-      padding:10px;
-      margin-bottom:8px;
-      border-radius:8px;
-      font-weight:600;
-    }
-    li::before{
-      content:"✓";
-      color:var(--accent);
-      margin-right:8px;
-    }
+.hero h1{
+  font-size:2.2rem;
+  margin-bottom:14px;
+}
 
-    .cta{text-align:center;margin-top:24px}
-    .cta a{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:var(--whatsapp);
-      color:#fff;
-      padding:14px 20px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:700;
-    }
+.hero p{
+  font-size:1.15rem;
+  opacity:.95;
+  margin-bottom:26px;
+}
 
-    footer{
-      text-align:center;
-      margin-top:24px;
-      font-size:.9rem;
-      opacity:.85;
-    }
+/* CTA */
+.cta-primary{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:linear-gradient(135deg, #25D366, #1ebe5d);
+  color:#fff;
+  padding:18px 28px;
+  border-radius:16px;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(37,211,102,.35);
+  transition:.35s ease;
+}
 
-    .legal{
-      font-size:.8rem;
-      opacity:.7;
-      margin-top:12px;
-    }
-  </style>
+.cta-primary:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 14px 36px rgba(37,211,102,.45);
+}
+
+.cta-primary::after{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:inherit;
+  background:var(--accent-soft);
+  opacity:0;
+  transition:.35s;
+  z-index:-1;
+}
+
+.cta-primary:hover::after{
+  opacity:1;
+}
+
+.cta-primary img{width:24px}
+
+.trust{
+  margin-top:14px;
+  font-size:.95rem;
+  opacity:.9;
+}
+
+/* SECTIONS */
+.section{
+  margin-top:36px;
+  background:var(--panel);
+  border-radius:var(--radius);
+  padding:30px;
+  box-shadow:0 14px 40px rgba(0,0,0,.45);
+  opacity:0;
+  transform:translateY(30px);
+  transition:.8s ease;
+}
+
+.section.visible{
+  opacity:1;
+  transform:none;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:24px;
+}
+
+/* SERVICES */
+.services, .benefits{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.service, .benefit{
+  background:rgba(255,255,255,.04);
+  padding:22px;
+  border-radius:16px;
+  transition:.35s ease;
+}
+
+.service:hover, .benefit:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.service h3{text-align:center;margin-bottom:10px}
+
+.service ul{list-style:none;padding:0}
+
+.service li{
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:10px;
+  background:rgba(255,255,255,.05);
+  font-weight:600;
+}
+
+.service li::before{
+  content:"✓";
+  color:var(--accent);
+  margin-right:8px;
+}
+
+.benefit{text-align:center}
+
+.benefit strong{
+  display:block;
+  margin-bottom:8px;
+  font-size:1.05rem;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:32px;
+  font-size:.9rem;
+  opacity:.85;
+}
+
+.legal{
+  font-size:.75rem;
+  opacity:.65;
+  margin-top:10px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+</style>
 </head>
 
 <body>
 <main class="container">
 
-  <div class="banner" role="img" aria-label="Cartão da empresa"></div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Assistência Técnica de Celulares e Notebooks</h1>
+    <p>Reparo e manutenção de celulares e notebooks com atendimento a domicilio, rápido e especializado.</p>
 
-  <section class="panel">
-    <h2>Nossos serviços</h2>
+    <a class="cta-primary"
+       href="https://wa.me/5548998049084?text=Olá,%20vim%20pelo%20anúncio%20e%20gostaria%20de%20um%20orçamento."
+       target="_blank" rel="noopener">
+      <img src="https://github.com/techmobilesolucoes/Home/blob/main/logo%20whatsapp.jpg?raw=true" alt="WhatsApp">
+      Falar com um técnico agora
+    </a>
 
-    <div class="services">
-      <div class="service">
-        <h3>Celulares</h3>
-        <ul>
-          <li>Troca de tela</li>
-          <li>Troca de bateria</li>
-          <li>Conector de carga</li>
-          <li>Troca de vidro traseiro</li>
-        </ul>
-      </div>
+    <div class="trust">
+      Atendimento diferenciado • Orçamento gratis • Serviço profissional
+    </div>
+  </div>
+</section>
 
-      <div class="service">
-        <h3>Notebooks</h3>
-        <ul>
-          <li>Troca de tela</li>
-          <li>Troca de teclado</li>
-          <li>Upgrade de memória e SSD</li>
-	  <li>Manutenção preventiva</li>
-
-        </ul>
-      </div>
+<section class="section reveal">
+  <h2>Serviços realizados</h2>
+  <div class="services">
+    <div class="service">
+      <h3>Celulares</h3>
+      <ul>
+        <li>Troca de tela, vidro traseiro e bateria</li>
+        <li>Conector de carga</li>
+        <li>Manutenção preventiva</li>
+        <li>Correções de software</li>
+      </ul>
     </div>
 
-    <div class="cta">
-      <a href="https://wa.me/5548998049084?text=Olá,%20vim%20pelo%20site%20e%20gostaria%20de%20informações." target="_blank" rel="noopener">
-        <img src="https://github.com/techmobilesolucoes/Home/blob/main/logo%20whatsapp.jpg?raw=true" width="22" alt="WhatsApp">
-        Falar com um técnico
-      </a>
+    <div class="service">
+      <h3>Notebooks</h3>
+      <ul>
+        <li>Troca de tela, bateria e teclado</li>
+        <li>Limpeza interna</li>
+        <li>Upgrade de SSD e memória</li>
+        <li>Manutenção geral</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    Atendimento de segunda a sábado — 8h às 20h
-    <div class="legal">
-      Tech Mobile é uma assistência técnica independente, sem vínculo com fabricantes ou marcas registradas.
+<section class="section reveal">
+  <h2>Por que escolher a Tech Mobile?</h2>
+  <div class="benefits">
+    <div class="benefit">
+      <strong>Resposta rápida</strong>
+      Atendimento e agendamento via WhatsApp
     </div>
-  </footer>
+    <div class="benefit">
+      <strong>Atendimento à domicilio</strong>
+      Sem necessidade de deixar o aparelho na assistência por horas
+    </div>
+    <div class="benefit">
+      <strong>Agilidade total</strong>
+      Realializamos o serviço no menor tempo possível
+    </div>
+  </div>
+</section>
+
+<footer>
+  Atendimento de segunda a sábado — 8h às 20h
+  <div class="legal">
+    Tech Mobile é uma assistência técnica independente, sem vínculo com fabricantes ou marcas registradas.
+  </div>
+</footer>
 
 </main>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.15});
+
+sections.forEach(section=>observer.observe(section));
+</script>
+
 </body>
 </html>
