@@ -1,13 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Carousel from '@/components/Carousel';
+import Services from '@/components/Services';
+import HowItWorks from '@/components/HowItWorks';
+import Testimonials from '@/components/Testimonials';
+import AboutUs from '@/components/AboutUs';
+import LegalNotice from '@/components/LegalNotice';
+import Footer from '@/components/Footer';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
+import LegalPopup from '@/components/LegalPopup';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Carousel />
+        <Services />
+        <HowItWorks />
+        <Testimonials />
+        <AboutUs />
+        <LegalNotice />
+      </main>
+      <Footer />
+      <WhatsAppFloat />
+      <LegalPopup />
+    </>
   );
 };
 
