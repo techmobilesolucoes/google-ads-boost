@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tech Mobile Floripa - Serviços especializados para Aparelhos Android e iOS em Florianópolis</title>
+<title>Tech Mobile Floripa - Assistência Técnica para Celulares e Notebooks em Florianópolis</title>
 
-<meta name="description" content="Serviços especializados para Aparelhos Android e iOS em Florianópolis">
+<meta name="description" content="Conserto de Celulares Android, Iphones, Notebooks e Macbooks em Florianópolis">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0b1c26">
 
@@ -603,6 +603,58 @@ footer{
   box-shadow: 0 4px 10px rgba(26,115,232,0.35);
 }
 
+.faq {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.faq-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #2a2f3a;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question:hover {
+  color: #38bdf8;
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer p {
+  padding-bottom: 20px;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
 </style>
 </head>
 
@@ -612,14 +664,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.getElementById("hero-text");
 
   const textos = [
-    `<span>Serviços especializados</span> em aparelhos Android e iOS em
+    `<span>Assistência Técnica especializada</span> em Conserto de Celulares Android e Iphones todos os modelos em 
      <span>Florianópolis e Região</span>`,
+     
+     `<span>Serviços Rápidos</span> Troca de Tela - Troca de Bateria - Troca de conector de carga - Troca de vidro traseiro
+     <span>Realizados o serviço aonde você estiver</span>`,
 
-    `<span>Serviços para Notebooks e Computadores Windows e MacOS</span> com Atendimento
-     <span>a Domicílio e Empresarial</span>`,
+    `<span>Assistência Técnica especializada</span> em Notebooks e Macbooks todos os modelos com
+     <span>atendimento a Domicílio</span>`,
 
-    `<span>Profissionais capacitados, atendimento rápido,</span>
-     resolva o seu problema <span>sem sair de casa</span>`
+     `<span>Serviços para Notebooks e Macbooks</span> Troca de teclado - Troca de bateria - Formatação e instação de software
+     Upgrade de SSD e Memória - Limpeza preventiva - Troca de pasta termica.`,
+
+    `<span>Profissionais capacitados, atendimento à domicílio, rápido e profissional</span>
+     Resolva o seu problema HOJE <span>sem sair de casa</span>`
   ];
 
   let index = 0;
@@ -635,6 +693,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 5000);
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const buttons = document.querySelectorAll('.faq-question');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function () {
+      const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+      // Fecha todos
+      buttons.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling.style.maxHeight = null;
+        btn.querySelector('.faq-icon').textContent = '+';
+      });
+
+      // Abre o clicado
+      if (!isOpen) {
+        this.setAttribute('aria-expanded', 'true');
+        const answer = this.nextElementSibling;
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        this.querySelector('.faq-icon').textContent = '−';
+      }
+    });
+  });
+});
+</script>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -688,6 +774,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <nav id="primary-nav" class="primary-nav">
       <a href="#servicos">Serviços</a>
       <a href="#como">Como funciona</a>
+      <a href="#Perguntas frequentes">Perguntas frequentes</a>
       <a href="#depoimentos">Avaliações</a>
       <a href="#Quem Somos">Quem Somos</a>
       <a href="#Aviso Legal">Aviso Legal</a>
@@ -726,26 +813,26 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/telaquebrada.jpg?raw=true" alt="Troca de telas" loading="lazy" decoding="async">
       <div class="card-content">
         <span class="badge">Serviços rápidos</br></span>
-        <h3>Smartphones</h3>
-        <p>Substituição de tela, Substituição de bateria, Substituição de conector de carga, Substituição de vidro traseiro.</p>
+        <h3>Celulares Android e Iphones</h3>
+        <p>Troca de tela - Troca de bateria - Troca de conector de carga - Troca de vidro traseiro - Serviços de software.</p>
       </div>
     </div>
 
     <div class="card animate delay-2" tabindex="0">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/consertoplacacelular.jpg?raw=true" alt="Reparo em placa" loading="lazy" decoding="async">
       <div class="card-content">
-        <span class="badge">Serviços avançados</br></span>
-        <h3>Serviços avançados em placa de aparelhos Android e iOS</br></h3>
-        <p>Somos especializados em serviços avançandos em placas eletronicas</br></p>
+        <span class="badge">Serviços avançados para celular</br></span>
+        <h3>Reparo em Placa de celulares android e Iphone</br></h3>
+        <p>Somos especializados em reparos avançados em placas de celulares</br></p>
       </div>
     </div>
 
     <div class="card animate delay-3" tabindex="0">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/notebook%20conserto%20placa.jpg?raw=true" alt="Serviços multimarcas" loading="lazy" decoding="async">
       <div class="card-content">
-        <span class="badge">Serviços avançados Notebook</br></span>
-        <h3>Serviços avançados em placa de Notebook Windows e MacOS</br></h3>
-        <p>Temos laboratório completo para serviços avançados em placas de notebooks</br></p>
+        <span class="badge">Serviços avançados para Notebook</br></span>
+        <h3>Reparo em recuperação de placa de Notebook e Macbook</br></h3>
+        <p>Somos especializados em reparo avançado em placas de notebooks</br></p>
       </div>
     </div>
   </div>
@@ -754,11 +841,96 @@ document.addEventListener("DOMContentLoaded", () => {
 <section id="como" class="highlight">
   <h2 class="animate">Como funciona?</h2>
   <div class="steps">
-    <div class="step animate delay-1">Você solicita gratuito via WhatsApp.</div>
-    <div class="step animate delay-2">O técnico avalia se o serviço pode ser realizado no local.</div>
-    <div class="step animate delay-3">Agenda o horário de atendimento diretamente com o profissional.</div>
+    <div class="step animate delay-1">Você solicita o orçamento gratuito via WhatsApp.</div>
+    <div class="step animate delay-2">verificamos se o serviço pode ser realizado no local ou no laborátorio.</div>
+    <div class="step animate delay-3">Agendamos o horário de atendimento exclusivo para você.</div>
+    <div class="step animate delay-3">Consertamos no local, Se necessário buscamos e entregamos sem custo adicional.</div>
   </div>
 </section>
+
+<section id="perguntas-frequentes" class="faq">
+  <h2 class="faq-title">Perguntas frequentes</h2>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Quanto tempo leva para consertar meu celular em casa?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        O tempo varia conforme o problema. Muitos consertos simples são realizados
+        em menos de 1 hora. Para serviços mais complexos, informamos o prazo após
+        o diagnóstico inicial.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Qual o custo da visita técnica?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        A visita técnica para diagnóstico é <strong>gratuita</strong> caso você
+        opte por realizar o conserto conosco.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Quais são as formas de pagamento disponíveis?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        Aceitamos Pix, cartão de crédito em até <strong>10x sem juros</strong>,
+        cartão de débito e dinheiro.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Vocês atendem apenas a domicílio?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        Não. Além do atendimento em domicílio, também realizamos consertos em nosso
+        laboratório localizado em Florianópolis.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Qual é a garantia do serviço?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        A garantia varia conforme o tipo de serviço e o aparelho consertado,
+        podendo ir de <strong>3 meses a 1 ano</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Quanto tempo leva um conserto em garantia?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>
+        Normalmente realizamos o conserto em garantia em até
+        <strong>24 horas</strong> após a solicitação.
+      </p>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- DEPOIMENTOS -->
@@ -887,18 +1059,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <section id="Quem Somos" class="cta">
   <h2 class="animate">Quem Somos</h2>
-  <p class="animate">Somos a Tech Mobile Floripa, uma empresa prestadora de serviços em Smartphones, notebooks e computadores</br>
+  <p class="animate">Somos a Tech Mobile Floripa Assistência Técnica
      Criada para oferecer soluções completas, seguras e eficientes em tecnologia</br>
-     Atuamos com todas as marcas e modelos, com destaque para Android, iOS, Windows e MacOS</br>
-     Unindo conhecimento técnico avançado, transparência e atendimento de alto padrão</br>
+     Uma empresa especializada em conserto de celulares, notebooks e computadores, atendemos todas as marcas e modelos</br>
+     Atendemos a domicílio, unindo conhecimento técnico avançado, transparência e atendimento de alto padrão</br>
   </p>
 </section>
 
 <section id="Aviso Legal" class="cta">
   <h2 class="animate">Aviso Legal</h2>
   <p class="animate"><p>
-      A <strong>Tech Mobile Floripa</strong> é uma empresa independente localizada em Florianópolis, especializada em serviços técnicos em aparelhos eletrônicos.</br>
-      serviços avançados de smartphones, notebooks e computadores de todas as marcas e modelos</br>
+      A <strong>Tech Mobile Floripa</strong> é uma empresa especializada em assistência técnica especiliazada em</br>
+      Serviços avançados de smartphones, notebooks e computadores de todas as marcas e modelos</br>
       Não possuimos vínculo, afiliação, autorização ou representação oficial com nenhum fabricante ou quaisquer outras marcas mencionadas em nosso site</br>
       Todas as marcas, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos</br>
       Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais</br>
@@ -911,13 +1083,14 @@ document.addEventListener("DOMContentLoaded", () => {
   <h2 class="animate">Contato</h2>
   <p class="animate">Entre em contato conosco pelo WhatsApp ou ligação.</br>
     Telefone: (48) 99804-9084</br>
-    Email: techmobilefloripa@hotmail.com</br>
+    Email: techmobilefloripa@gmail.com</br>
   </p>
 </section>
 
 <footer>
   <p>
-    <strong>Tech Mobile Floripa Assistência Técnica</strong> © 2026<br>
+    <strong>Tech Mobile Floripa Assistência Técnica de Celulares e Notebooks</strong> © 2026 – <br>
+    Rua Ferdinand Demetz, 40 - Bela Vista, Palhoça - SC - CNPJ47.558.493/0001-43 <br>
   </p>
 </footer>
 <!-- BOTÃO WHATSAPP FLUTUANTE -->
@@ -1028,4 +1201,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
