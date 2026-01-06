@@ -1,1206 +1,591 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tech Mobile Floripa — Assistência Técnica para Celulares e Notebooks em Florianópolis</title>
+  <meta name="description" content="Conserto de celulares Android, iPhones, notebooks e MacBooks em Florianópolis. Atendimento ágil e assistência técnica a domicílio.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0b1c26">
 
-<title>Tech Mobile Floripa - Assistência Técnica para Celulares e Notebooks em Florianópolis</title>
-
-<meta name="description" content="Conserto de Celulares Android, Iphones, Notebooks e Macbooks em Florianópolis">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0b1c26">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- site favicon -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" type="image/jpeg">
 
-<style>
-:root{
-  --primary:#1dd3b0;
-  --whatsapp:#25D366;
-  --dark:#050b10;
-  --dark-2:#0b1c26;
-  --text:#f2f5f7;
-  --muted:#a9b4bb;
-  --radius:18px;
-  --max:1200px;
-}
+  <style>
+    :root{
+      --primary: #1dd3b0;
+      --whatsapp: #25D366;
+      --dark: #050b10;
+      --dark-2: #0b1c26;
+      --text: #f2f5f7;
+      --muted: #a9b4bb;
+      --radius: 18px;
+      --max-width: 1200px;
+      --header-height: 84px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--dark-2), var(--dark) 20%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      line-height:1.45;
+    }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:'Montserrat',Arial,sans-serif;
-  background:radial-gradient(circle at top,var(--dark-2),var(--dark) 20%);
-  color:var(--text);
-  overflow-x:hidden;
-}
+    /* UTIL */
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
 
-/* ANIMAÇÕES */
-.animate{
-  opacity:0;
-  transform:translateY(24px) scale(.98);
-  transition:opacity .8s ease, transform .8s ease;
-}
-.animate.show{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-.delay-1{transition-delay:.15s}
-.delay-2{transition-delay:.3s}
-.delay-3{transition-delay:.45s}
+    /* HEADER */
+    header{
+      position:sticky;
+      top:0;
+      z-index:60;
+      background:rgba(5,11,16,.86);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .header-wrap{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-logo{
+      height:72px;
+      width:auto;
+      max-width:260px;
+      object-fit:contain;
+      display:block;
+    }
+    .brand-slogan{
+      font-size:16px;
+      color:var(--muted);
+      font-weight:700;
+    }
 
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,11,16,.85);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
-.header-wrap{
-  max-width:var(--max);
-  margin:auto;
-  padding:18px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between; /* brand left, nav center, badge right */
-  gap:36px; /* more breathing room */
-}  
-.brand h1{
-  margin:0;
-  font-weight:800;
-  /* show visible slogan when logo is removed */
-  font-size:18px;
-  line-height:1;
-}
+    nav{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:8px;
+      transition:all .15s ease;
+      position:relative;
+    }
+    nav a:focus, nav a:hover{outline:3px solid rgba(29,211,176,.18);outline-offset:3px;color:#fff;background:rgba(29,211,176,.03)}
+    nav a::after{
+      content:'';
+      position:absolute;
+      left:12px;right:12px;bottom:6px;height:4px;background:var(--primary);border-radius:4px;transform:scaleX(0);transform-origin:center;transition:transform .18s ease;
+    }
+    nav a.active::after{transform:scaleX(1)}
+    nav a.active{color:#fff}
 
-/* Accessibility helper: visually hidden but available to screen readers */
-.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-.brand span{ /* fallback small helper; main visible slogan uses .brand-slogan */
-  font-size:12px;
-  color:var(--muted);
-}
+    .nav-toggle{
+      display:none;
+      background:transparent;border:0;padding:8px;cursor:pointer;color:var(--text)
+    }
+    .nav-toggle:focus{outline:3px solid rgba(29,211,176,.18);border-radius:8px}
 
-/* Visible slogan shown in header when logo is removed */
-.brand-slogan{
-  font-size:22px;
-  color:#ffffff;
-  font-weight:800;
-  display:inline-block;
-}
-/* Brand layout and logo sizing */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.brand-logo{
-  height:110px; /* larger on desktop */
-  width:auto;
-  max-width:320px;
-  object-fit:contain;
-  display:block;
-}
-.header-badge{margin-left:36px;display:flex;align-items:center}
-.header-badge-img{height:110px;width:auto;max-width:320px;object-fit:contain;display:block}  
+    /* MOBILE NAV */
+    @media (max-width:900px){
+      nav{position:absolute;left:12px;right:12px;top:100%;background:rgba(5,11,16,.98);overflow:hidden;max-height:0;border-radius:12px;border:1px solid rgba(255,255,255,.03);transition:max-height .28s ease,opacity .18s ease;opacity:0;z-index:55}
+      nav.open{max-height:420px;opacity:1;padding:10px 12px}
+      nav a{display:block;padding:12px 14px;margin:6px 0;border-top:1px solid rgba(255,255,255,.02)}
+      .nav-toggle{display:inline-flex}
+      .brand-logo{height:64px}
+    }
 
-.brand-link{display:inline-flex;align-items:center;text-decoration:none;color:inherit}
-.brand-link:focus{outline:3px solid rgba(29,211,176,.25);outline-offset:3px;border-radius:6px}
-@media(max-width:600px){
-  .brand-logo{height:80px}
-  .header-badge-img{height:80px}
-  .brand-slogan{font-size:18px}
-}    
-nav a{
-  color:var(--muted);
-  text-decoration:none;
-  margin-left:18px;
-  font-size:14px;
-  padding:8px 10px 14px; /* extra bottom padding to make room for underline */
-  border-radius:8px;
-  transition:all .15s ease;
-  position:relative;
-}
-nav a:hover, nav a:focus{
-  color:#fff;
-  outline:3px solid rgba(29,211,176,.28);
-  outline-offset:4px;
-  background:rgba(29,211,176,.03);
-}
-/* Underline indicator for active/selected nav link */
-nav a::after{
-  content:'';
-  position:absolute;
-  left:12px;
-  right:12px;
-  bottom:6px;
-  height:4px;
-  background:var(--primary);
-  border-radius:4px;
-  transform:scaleX(0);
-  transform-origin:center;
-  transition:transform .18s ease;
-}
-nav a.active::after{transform:scaleX(1)}
-nav a.active{color:#fff}
+    /* BUTTONS */
+    .btn{display:inline-block;padding:12px 28px;border-radius:999px;font-weight:700;text-decoration:none}
+    .btn-whatsapp{background:var(--whatsapp);color:#012226;box-shadow:0 12px 30px rgba(37,211,102,.28)}
+    .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 20px 48px rgba(37,211,102,.46)}
 
+    /* HERO */
+    .hero{
+      padding:86px 18px 56px;
+      text-align:center;
+      background:
+        linear-gradient(180deg, rgba(5,11,16,.62), rgba(5,11,16,.9)),
+        url('https://github.com/techmobilesolucoes/Home/blob/main/laboratorio.jpg?raw=true') center/cover no-repeat;
+      background-attachment: scroll; /* avoid fixed on mobile */
+    }
+    .hero-inner{max-width:920px;margin:0 auto}
+    .hero h2{font-size:36px;font-weight:800;margin:0;color:#fff}
+    .hero h2 span{color:var(--primary)}
+    .hero p{color:var(--muted);margin:14px 0 0}
 
-/* Hamburger / responsive nav */
-.nav-toggle{
-  display:none;
-  background:transparent;
-  border:0;
-  padding:8px;
-  cursor:pointer;
-  color:var(--text);
-}
-.nav-toggle:focus{outline:3px solid rgba(29,211,176,.18);border-radius:8px}
-.nav-toggle .hamburger{
-  display:inline-block;
-  width:22px;
-  height:2px;
-  background:var(--text);
-  position:relative;
-}
-.nav-toggle .hamburger::before,.nav-toggle .hamburger::after{
-  content:'';
-  position:absolute;
-  left:0;
-  width:22px;
-  height:2px;
-  background:var(--text);
-}
-.nav-toggle .hamburger::before{top:-7px}
-.nav-toggle .hamburger::after{top:7px}
+    @media (max-width:600px){
+      .hero{padding:48px 14px}
+      .hero h2{font-size:22px}
+    }
 
-/* Mobile nav: collapsed by default using max-height */
-.primary-nav{
-  position:static;
-}
-@media(max-width:900px){
-  .header-wrap{position:relative;justify-content:space-between}
-  .nav-toggle{display:inline-flex;align-items:center}
-  .primary-nav{
-    position:absolute;
-    left:0;
-    right:0;
-    top:100%;
-    background:rgba(5,11,16,.95);
-    overflow:hidden;
-    max-height:0;
-    transition:max-height .32s ease, opacity .2s ease;
-    opacity:0;
-    z-index:45;
-    display:block;
-    border-bottom-left-radius:12px;
-    border-bottom-right-radius:12px;
-  }
-  .primary-nav.open{max-height:420px;opacity:1}
-  .primary-nav a{display:block;padding:14px 20px;margin-left:0;border-top:1px solid rgba(255,255,255,.03);font-size:16px}
-  section{ scroll-margin-top:90px; }
-  .header-badge{display:none} /* hide badge on small screens */
-}  
-@media(min-width:901px){
-  .primary-nav{display:flex;gap:22px;align-items:center;flex:1;justify-content:center;max-width:60%}
-  .brand{margin-right:48px}
-  .header-badge{margin-left:48px}
-}  
+    /* SECTIONS & LAYOUT */
+    section{max-width:var(--max-width);margin:0 auto;padding:64px 18px;scroll-margin-top:94px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 
-/* BOTÕES */
-.btn{
-  display:inline-block;
-  padding:15px 34px;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  transition:.3s ease;
-}
-.btn-whatsapp{
-  background:var(--whatsapp);
-  color:#0b1c26;
-  box-shadow:0 15px 40px rgba(37,211,102,.35);
-}
-.btn-whatsapp:hover{
-  transform:translateY(-2px);
-  box-shadow:0 22px 60px rgba(37,211,102,.55);
-}
+    /* CARDS */
+    .card{background:linear-gradient(180deg,#07131a,#041018);border-radius:14px;border:1px solid rgba(255,255,255,.04);overflow:hidden;transition:transform .32s ease,box-shadow .32s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.6)}
+    .card img{width:100%;height:160px;object-fit:cover;display:block}
+    .card-content{padding:22px}
+    .card h3{margin:6px 0 6px;color:#fff}
+    .card p{color:var(--muted);margin:0;font-size:14px}
+    .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(29,211,176,.12);color:var(--primary);font-size:12px;margin-bottom:8px}
 
-/* HERO */
-.hero{
-  padding:120px 20px;
-  text-align:center;
-  background:
-    linear-gradient(180deg,rgba(5,11,16,.65),rgba(5,11,16,.95)),
-    url('https://github.com/techmobilesolucoes/Home/blob/main/laboratorio.jpg?raw=true') center/cover fixed no-repeat;
-}
-.hero-inner{
-  max-width:900px;
-  margin:auto;
-}
-.hero h2{
-  font-size:44px;
-  font-weight:800;
-}
-.hero h2 span{color:var(--primary)}
-.hero p{
-  color:var(--muted);
-  max-width:820px;
-  margin:20px auto 36px;
-}
-.google-review-box {
-  margin: 32px auto 48px;
-  padding: 24px;
-  max-width: 420px;
-  text-align: center;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
+    /* COMO FUNCIONA */
+    .highlight{background:linear-gradient(135deg,rgba(29,211,176,.06),rgba(11,94,215,.04));border-radius:14px;padding:30px}
+    .steps{display:grid;gap:14px}
+    .step{position:relative;padding-left:38px}
+    .step::before{content:'✔';position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--primary);color:#001018;display:flex;align-items:center;justify-content:center;font-weight:800}
 
-.google-review-box p {
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
+    /* CARROSSEL (simples, apenas visual) */
+    .carousel-section{text-align:center;padding-bottom:6px}
+    .carousel{overflow:hidden;max-width:920px;margin:18px auto;border-radius:14px;border:1px solid rgba(255,255,255,.06);height:280px}
+    .carousel-track{display:flex;width:400%;animation:scroll 22s linear infinite;align-items:stretch}
+    .carousel img{flex:0 0 25%;width:25%;height:100%;object-fit:cover;display:block}
+    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-75%)}}
+    @media(max-width:600px){.carousel{height:180px}}
 
-.google-review-box img {
-  display: block;
-  margin: 0 auto;
-  padding: 8px;
-  border-radius: 12px;
-  background: #ffffff;
-}
+    /* TESTIMONIALS */
+    .google-review-box{margin:24px auto;padding:18px;max-width:420px;text-align:center;border-radius:12px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.06)}
+    .review-button{display:inline-block;margin-top:12px;padding:12px 22px;background:#1a73e8;color:#fff;font-weight:600;border-radius:8px;text-decoration:none;box-shadow:0 8px 20px rgba(26,115,232,.25)}
+    .testimonial-card{background:linear-gradient(180deg,#07101a,#041018);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,.04);min-height:140px}
+    .stars{display:flex;gap:6px;margin-bottom:8px;color:#FFD700}
 
-/* EFEITO FLASH HERO */
-.hero-flash{
-  animation:flashFade .6s ease;
-}
+    /* FAQ */
+    .faq{max-width:900px;margin:40px auto;padding:0 12px}
+    .faq-title{text-align:center;font-size:1.6rem;margin-bottom:26px}
+    .faq-item{border-bottom:1px solid rgba(255,255,255,.03)}
+    .faq-question{width:100%;background:none;border:0;padding:18px 0;font-size:1rem;font-weight:700;text-align:left;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-question:focus{outline:3px solid rgba(29,211,176,.12);border-radius:6px}
+    .faq-icon{font-size:1.4rem;transition:transform .3s ease}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .36s ease}
+    .faq-answer p{padding-bottom:18px;color:var(--muted);margin:0;line-height:1.6}
 
-@keyframes flashFade{
-  0%{
-    opacity:1;
-    text-shadow:none;
-  }
-  40%{
-    opacity:.2;
-    text-shadow:0 0 18px rgba(29,211,176,.9);
-  }
-  100%{
-    opacity:1;
-    text-shadow:none;
-  }
-}
+    /* CTA, footer and whatsapp */
+    .cta{text-align:center}
+    footer{text-align:center;padding:28px 18px;font-size:13px;color:var(--muted);border-top:1px solid rgba(255,255,255,.04)}
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border-radius:50%;background:var(--whatsapp);color:#012226;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 18px 36px rgba(37,211,102,.35);z-index:999}
+    .whatsapp-float img{width:28px;height:28px;display:block;border-radius:50%}
 
-
-/* POPUP AVISO LEGAL */
-.legal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(6px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.legal-modal{
-  background:linear-gradient(180deg,#0a1620,#050b10);
-  border-radius:18px;
-  max-width:420px;
-  width:90%;
-  padding:28px;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 40px 80px rgba(0,0,0,.7);
-  text-align:center;
-}
-
-.legal-modal h2{
-  margin-top:0;
-  color:#ffffff;
-}
-
-.legal-modal p{
-  color:#a9b4bb;
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:16px;
-}
-
-.legal-btn{
-  margin-top:12px;
-  padding:14px 32px;
-  border:none;
-  border-radius:999px;
-  background:#1dd3b0;
-  color:#001018;
-  font-weight:700;
-  cursor:pointer;
-  transition:.25s ease;
-}
-
-.legal-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 15px 40px rgba(29,211,176,.4);
-}
-
-/* Background for Serviços Express section */
-#servicos{
-  /* subtle dark overlay + tech-related image (replace URL if desired) */
-  background:
-    linear-gradient(180deg, rgba(5,11,16,.6), rgba(5,11,16,.6)),
-    url('https://github.com/techmobilesolucoes/Home/blob/main/tecnico%20trabalhando.jpg?raw=true') center/cover no-repeat;
-  border-radius:calc(var(--radius) - 6px);
-  padding:100px 20px; /* slightly more vertical space */
-}
-
-@media(max-width:800px){
-  #servicos{background-attachment:scroll;padding:80px 16px}
-}
-
-/* SEÇÕES */
-section{
-  max-width:var(--max);
-  margin:auto;
-  padding:80px 20px;
-  scroll-margin-top:130px; /* offset for taller sticky header when navigating via anchors */
-}  
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-
-/* CARDS */
-.card{
-  background:linear-gradient(180deg,#0a1620,#050b10);
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,.06);
-  overflow:hidden;
-  transition:.4s ease;
-}
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 30px 60px rgba(0,0,0,.6);
-}
-.card:focus{outline:3px solid rgba(29,211,176,.12);outline-offset:6px}
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  display:block;
-}
-.card-content{
-  padding:34px;
-}
-.card h3{
-  margin-top:10px;
-  color:#fff;
-}
-.card p{
-  color:var(--muted);
-  font-size:14px;
-}
-.badge{
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:999px;
-  background:rgba(29,211,176,.15);
-  color:var(--primary);
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-/* COMO FUNCIONA */
-.highlight{
-  background:linear-gradient(135deg,rgba(29,211,176,.12),rgba(11,94,215,.12));
-  border-radius:var(--radius);
-}
-.steps{display:grid;gap:22px}
-.step{
-  padding-left:44px;
-  position:relative;
-}
-.step::before{
-  content:'✔';
-  position:absolute;
-  left:0;
-  top:0;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:var(--primary);
-  color:#001018;
-  font-weight:800;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* CARROSSEL */
-.carousel-section{
-  padding:60px 20px;
-  text-align:center;
-}
-.carousel{
-  overflow:hidden;
-  max-width:900px;
-  margin:32px auto 0;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,.08);
-}
-.carousel-track{
-  display:flex;
-  width:400%;
-  animation:scroll 22s infinite linear;
-  align-items:center; /* center images vertically inside the track */
-}
-.carousel{
-  /* fix height so images fill the carousel and avoid vertical gaps */
-  height:320px;
-}
-.carousel-track{
-  display:flex;
-  width:400%;
-  animation:scroll 22s infinite linear;
-  align-items:stretch; /* make images stretch to track height */
-  gap:0; /* ensure no gaps between items */
-}
-.carousel img{
-  /* ensure each image takes 1/4 of the track (4 images) and fills its slot without gaps */
-  flex:0 0 25%;
-  width:25%;
-  height:100%;
-  object-fit:cover; /* fill and crop to avoid letterboxing */
-  display:block;
-  margin:0;
-  padding:0;
-}
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-75%)}
-}
-
-/* CTA */
-.cta{
-  text-align:center;
-  background:linear-gradient(180deg,#0a1620,#050b10);
-  border-radius:var(--radius);
-}
-
-/* DEPOIMENTOS */
-.testimonials{padding:40px 20px}
-.testimonials h2{margin-bottom:18px}
-.testimonials h2{color:#fff}
-
-/* Background for Depoimentos (testimonials) */
-#depoimentos{
-  background:
-    linear-gradient(180deg, rgba(5,11,16,.65), rgba(5,11,16,.7)),
-    url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  padding:60px 20px;
-  border-radius:var(--radius);
-  margin:40px 0;
-}
-
-@media(max-width:800px){
-  #depoimentos{background-attachment:scroll;padding:48px 16px}
-}
-.testimonial-card{background:linear-gradient(180deg,#07101a,#061018);border-radius:14px;padding:24px;border:1px solid rgba(255,255,255,.04)}
-.testimonial-card .stars{display:flex;gap:6px;margin-bottom:10px;color:#FFD700}
-.testimonial-card p{color:var(--muted);margin:0 0 12px}
-.testimonial-card .meta{font-weight:700;color:#fff;font-size:14px}
-.testimonial-card .meta small{display:block;color:var(--muted);font-weight:400}
-.testimonials .grid{align-items:start}
-.testimonial-card{min-height:150px}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px 20px;
-  font-size:13px;
-  color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* WHATSAPP FLUTUANTE */
-.whatsapp-float{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:var(--whatsapp);
-  color:#0b1c26;
-  font-size:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  box-shadow:0 18px 40px rgba(37,211,102,.45);
-  z-index:999;
-  transition:.3s ease;
-}
-.whatsapp-float:hover{
-  transform:translateY(-6px) scale(1.05);
-  box-shadow:0 28px 60px rgba(37,211,102,.7);
-}
-.whatsapp-float:focus{outline:3px solid rgba(0,0,0,.12);outline-offset:4px}
-
-/* SVG sizing for the real WhatsApp icon */
-.whatsapp-float svg,
-.whatsapp-float .whatsapp-icon {
-  width:30px;
-  height:30px;
-  display:block;
-}
-.whatsapp-float .whatsapp-icon{
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-}
-
-@media(max-width:600px){
-  .hero h2{font-size:32px}
-  .carousel{height:200px}
-  .carousel img{height:100%}
-  .whatsapp-float{
-    width:58px;
-    height:58px;
-    font-size:26px;
-    right:16px;
-    bottom:16px;
-  }
-  .whatsapp-float svg,
-  .whatsapp-float .whatsapp-icon{width:26px;height:26px}
-}
-
-.review-button{
-  display: inline-block;
-  margin-top: 12px;
-  padding: 14px 26px;
-  background: #1a73e8; /* azul Google */
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 6px 16px rgba(26,115,232,0.35);
-}
-
-.review-button:hover{
-  background: #1558b0;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(26,115,232,0.45);
-}
-
-.review-button:active{
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(26,115,232,0.35);
-}
-
-.faq {
-  max-width: 900px;
-  margin: 80px auto;
-  padding: 0 20px;
-}
-
-.faq-title {
-  text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 40px;
-}
-
-.faq-item {
-  border-bottom: 1px solid #2a2f3a;
-}
-
-.faq-question {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 20px 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: left;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.faq-question:hover {
-  color: #38bdf8;
-}
-
-.faq-icon {
-  font-size: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
-.faq-answer p {
-  padding-bottom: 20px;
-  color: #cbd5e1;
-  line-height: 1.6;
-}
-
-</style>
+    /* small adjustments */
+    .animate{opacity:0;transform:translateY(18px) scale(.99);transition:opacity .7s ease,transform .7s ease}
+    .animate.show{opacity:1;transform:none}
+  </style>
 </head>
-
 <body>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("hero-text");
+  <!-- AVISO LEGAL (POPUP) -->
+  <div id="legal-popup" class="legal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;">
+    <div class="legal-modal" role="dialog" aria-labelledby="legal-title" aria-modal="true" style="background:linear-gradient(180deg,#0a1620,#050b10);border-radius:14px;max-width:520px;width:92%;padding:22px;border:1px solid rgba(255,255,255,.06);box-shadow:0 32px 72px rgba(0,0,0,.6);text-align:left;color:var(--muted)">
+      <h2 id="legal-title" style="color:#fff;margin-top:0">Aviso Legal</h2>
+      <p style="color:var(--muted);margin:8px 0 16px">
+        A <strong>Tech Mobile Floripa</strong> é uma empresa independente e especializada em diagnóstico e reparo de aparelhos Android, iOS, macOS e Windows. Não possuímos vínculo, afiliação ou representação oficial com fabricantes citados; nomes e logotipos são de seus respectivos proprietários e são usados apenas para identificação dos aparelhos atendidos. Os serviços são prestados por técnicos qualificados em laboratórios independentes.
+      </p>
+      <div style="text-align:center">
+        <button id="legal-accept" class="legal-btn" style="margin-top:8px;padding:12px 24px;border-radius:999px;border:0;background:var(--primary);color:#001018;font-weight:700;cursor:pointer">Entendi e continuar</button>
+      </div>
+    </div>
+  </div>
 
-  const textos = [
-    `<span>Assistência Técnica especializada</span> em Conserto de Celulares Android e Iphones todos os modelos em 
-     <span>Florianópolis e Região</span>`,
-     
-     `<span>Serviços Rápidos</span> Troca de Tela - Troca de Bateria - Troca de conector de carga - Troca de vidro traseiro
-     <span>Realizados o serviço aonde você estiver</span>`,
+  <header>
+    <div class="header-wrap">
+      <div class="brand">
+        <a href="/" class="brand-link" aria-label="Ir para página inicial">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" alt="Logotipo Tech Mobile Floripa" class="brand-logo" loading="eager" decoding="async">
+        </a>
+      </div>
 
-    `<span>Assistência Técnica especializada</span> em Notebooks e Macbooks todos os modelos com
-     <span>atendimento a Domicílio</span>`,
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu">
+        <span class="hamburger" aria-hidden="true" style="display:inline-block;width:22px;height:2px;background:var(--text);position:relative">
+          <span style="position:absolute;left:0;top:-7px;width:22px;height:2px;background:var(--text);"></span>
+          <span style="position:absolute;left:0;top:7px;width:22px;height:2px;background:var(--text);"></span>
+        </span>
+      </button>
 
-     `<span>Serviços para Notebooks e Macbooks</span> Troca de teclado - Troca de bateria - Formatação e instação de software
-     Upgrade de SSD e Memória - Limpeza preventiva - Troca de pasta termica.`,
+      <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#perguntas-frequentes">Perguntas frequentes</a>
+        <a href="#depoimentos">Avaliações</a>
+        <a href="#quem-somos">Quem somos</a>
+        <a href="#aviso-legal">Aviso legal</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
 
-    `<span>Profissionais capacitados, atendimento à domicílio, rápido e profissional</span>
-     Resolva o seu problema HOJE <span>sem sair de casa</span>`
-  ];
+  <main>
+    <section id="hero" class="hero animate" aria-label="Apresentação">
+      <div class="hero-inner">
+        <h2 id="hero-text">
+          <span>Assistência técnica especializada</span> para celulares Android, iOS, notebooks e MacBooks em <span>Florianópolis e região</span>
+        </h2>
+        <p class="sr-only">Serviços: troca de tela, baterias, conector de carga, reparo em placas, formatação, upgrade de SSD e muito mais.</p>
+      </div>
+    </section>
 
-  let index = 0;
+    <section id="carrossel" class="carousel-section animate" role="region" aria-label="Carrossel de serviços">
+      <div class="carousel" aria-hidden="false">
+        <div class="carousel-track" aria-hidden="true">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/telaquebradasamsung.jpg?raw=true" alt="Troca de tela - exemplo" loading="lazy" decoding="async">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia_tecnica_macbook_brasilia_aguas_claras_1080x.jpg?raw=true" alt="Reparo em MacBook" loading="lazy" decoding="async">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/vidrotraseiroquebradoiphone.jpg?raw=true" alt="Troca de vidro traseiro" loading="lazy" decoding="async">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia%20notebook.jpg?raw=true" alt="Reparo em notebook" loading="lazy" decoding="async">
+          <!-- imagens adicionais repetidas para o efeito de loop -->
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/vidrotraseiroquebradoiphone.jpg?raw=true" alt="" loading="lazy" decoding="async">
+          <img src="https://github.com/techmobilesolucoes/imagensdeservi-os/blob/main/reparo%20em%20mac.jpg?raw=true" alt="" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <noscript><p style="text-align:center;color:var(--muted)">Ative o JavaScript para ver o carrossel.</p></noscript>
+    </section>
 
-  setInterval(() => {
-    index = (index + 1) % textos.length;
+    <section id="servicos" aria-labelledby="servicos-title">
+      <h2 id="servicos-title" class="animate">Serviços</h2>
+      <div class="grid">
+        <article class="card animate" tabindex="0" aria-labelledby="card-phones-title">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/telaquebrada.jpg?raw=true" alt="Troca de telas" loading="lazy" decoding="async">
+          <div class="card-content">
+            <span class="badge">Serviços rápidos</span>
+            <h3 id="card-phones-title">Celulares Android e iPhone</h3>
+            <p>Troca de tela, troca de bateria, troca de conector de carga, troca de vidro traseiro e serviços de software.</p>
+          </div>
+        </article>
 
-    hero.classList.remove("hero-flash");
-    void hero.offsetWidth; // força reflow para reiniciar animação
-    hero.classList.add("hero-flash");
+        <article class="card animate" tabindex="0" aria-labelledby="card-board-phone-title">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/consertoplacacelular.jpg?raw=true" alt="Reparo em placa de celular" loading="lazy" decoding="async">
+          <div class="card-content">
+            <span class="badge">Reparo avançado</span>
+            <h3 id="card-board-phone-title">Reparo em placa (celulares)</h3>
+            <p>Especialistas em reparos relacionados à placa lógica de aparelhos Android e iPhone.</p>
+          </div>
+        </article>
 
-    hero.innerHTML = textos[index];
-  }, 5000);
-});
-</script>
+        <article class="card animate" tabindex="0" aria-labelledby="card-notebook-title">
+          <img src="https://github.com/techmobilesolucoes/Home/blob/main/notebook%20conserto%20placa.jpg?raw=true" alt="Reparo em placa de notebook" loading="lazy" decoding="async">
+          <div class="card-content">
+            <span class="badge">Serviços para notebooks</span>
+            <h3 id="card-notebook-title">Reparo em placa de Notebook e MacBook</h3>
+            <p>Reparos avançados em placas, upgrades de SSD/memória, troca de teclado e manutenção geral.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const buttons = document.querySelectorAll('.faq-question');
+    <section id="como-funciona" class="highlight" aria-labelledby="como-title">
+      <h2 id="como-title" class="animate">Como funciona</h2>
+      <div class="steps">
+        <div class="step animate">Solicite orçamento gratuito via WhatsApp.</div>
+        <div class="step animate">Verificamos se o serviço pode ser realizado no local ou no laboratório.</div>
+        <div class="step animate">Agendamos um horário exclusivo para atendimento.</div>
+        <div class="step animate">Consertamos no local; quando necessário, buscamos e entregamos sem custo adicional.</div>
+      </div>
+    </section>
 
-  buttons.forEach(button => {
-    button.addEventListener('click', function () {
-      const isOpen = this.getAttribute('aria-expanded') === 'true';
+    <section id="perguntas-frequentes" class="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="faq-title">Perguntas frequentes</h2>
 
-      // Fecha todos
-      buttons.forEach(btn => {
-        btn.setAttribute('aria-expanded', 'false');
-        btn.nextElementSibling.style.maxHeight = null;
-        btn.querySelector('.faq-icon').textContent = '+';
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1btn">
+          Quanto tempo leva para consertar meu celular em casa?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq1" class="faq-answer" role="region" aria-labelledby="faq1btn">
+          <p>Muitos consertos simples são realizados em menos de 1 hora. Para serviços mais complexos, informamos o prazo após o diagnóstico inicial.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2btn">
+          Qual o custo da visita técnica?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq2" class="faq-answer" role="region" aria-labelledby="faq2btn">
+          <p>A visita técnica para diagnóstico é <strong>gratuita</strong> caso você opte por realizar o conserto conosco.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3btn">
+          Quais são as formas de pagamento disponíveis?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq3" class="faq-answer" role="region" aria-labelledby="faq3btn">
+          <p>Aceitamos Pix, cartão de crédito em até <strong>10x sem juros</strong>, cartão de débito e dinheiro.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4btn">
+          Vocês atendem apenas a domicílio?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq4" class="faq-answer" role="region" aria-labelledby="faq4btn">
+          <p>Não. Além do atendimento a domicílio, realizamos consertos em nosso laboratório localizado em Florianópolis.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5btn">
+          Qual é a garantia do serviço?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq5" class="faq-answer" role="region" aria-labelledby="faq5btn">
+          <p>A garantia varia conforme o tipo de serviço e o aparelho, podendo ir de <strong>3 meses a 1 ano</strong>.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6btn">
+          Quanto tempo leva um conserto em garantia?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="faq6" class="faq-answer" role="region" aria-labelledby="faq6btn">
+          <p>Normalmente realizamos o conserto em garantia em até <strong>24 horas</strong> após a solicitação.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="depoimentos" class="testimonials animate" role="region" aria-labelledby="depoimentos-heading">
+      <h2 id="depoimentos-heading" style="text-align:center">Veja o que dizem nossos clientes</h2>
+
+      <div class="google-review-box" role="note" aria-label="Avaliação no Google">
+        <p>Já utilizou nossos serviços?<br><strong>Escaneie o QR Code e avalie a Tech Mobile Floripa no Google</strong></p>
+        <img src="https://github.com/techmobilesolucoes/Home/blob/main/qr%20code%20avalia%C3%A7%C3%A3o%20do%20google.png?raw=true" alt="QR Code para avaliação no Google" width="160" height="160" loading="lazy" decoding="async">
+        <div style="margin-top:12px">
+          <a href="https://g.page/r/CZaiGYPVZQ7YEBM/review" target="_blank" rel="noopener noreferrer" class="review-button" role="button" aria-label="Avaliar no Google">Avaliar no Google ⭐</a>
+        </div>
+      </div>
+
+      <div class="grid" aria-live="polite">
+        <!-- Depoimentos (exemplos estáticos) -->
+        <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+          <div class="stars" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+          </div>
+          <p itemprop="reviewBody">Veio até minha casa e resolveu o problema na hora. Honestidade e profissionalismo — recomendo.</p>
+          <div class="meta"><span itemprop="author">Victor Bentos</span></div>
+        </div>
+
+        <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+          <div class="stars" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+          </div>
+          <p itemprop="reviewBody">Excelente profissional. Levou nossos aparelhos e realizou o serviço no mesmo dia.</p>
+          <div class="meta"><span itemprop="author">Abigail Vaccaro</span></div>
+        </div>
+
+        <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+          <div class="stars" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+          </div>
+          <p itemprop="reviewBody">Atendimento excelente na minha loja. Serviço rápido e de qualidade.</p>
+          <div class="meta"><span itemprop="author">Paulo Bossle</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quem-somos" class="cta" aria-labelledby="quem-title">
+      <h2 id="quem-title" class="animate">Quem somos</h2>
+      <p class="animate">A Tech Mobile Floripa é uma assistência técnica especializada que oferece soluções seguras e eficientes em consertos de celulares, notebooks e computadores de todas as marcas. Atendemos a domicílio e em laboratório, com transparência e alto padrão de atendimento.</p>
+    </section>
+
+    <section id="aviso-legal" class="cta" aria-labelledby="aviso-title">
+      <h2 id="aviso-title" class="animate">Aviso legal</h2>
+      <p class="animate" style="color:var(--muted);max-width:880px;margin:0 auto">
+        A Tech Mobile Floripa não possui vínculo, afiliação ou representação oficial com os fabricantes mencionados. Logotipos e nomes são de propriedade de seus respectivos donos e são utilizados apenas para identificar os aparelhos atendidos.
+      </p>
+    </section>
+
+    <section id="contato" class="cta" aria-labelledby="contato-title">
+      <h2 id="contato-title" class="animate">Contato</h2>
+      <p class="animate" style="color:var(--muted);margin-bottom:8px">
+        Entre em contato pelo WhatsApp ou ligação:<br>
+        <a href="tel:+5548998049084" style="color:var(--primary);font-weight:700;text-decoration:none"> (48) 99804-9084</a><br>
+        <a href="mailto:techmobilefloripa@gmail.com" style="color:var(--muted);text-decoration:none">techmobilefloripa@gmail.com</a>
+      </p>
+      <p style="margin-top:8px"><a class="btn btn-whatsapp" href="https://wa.me/5548998049084" target="_blank" rel="noopener noreferrer">Abrir conversa no WhatsApp</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <strong>Tech Mobile Floripa — Assistência Técnica</strong> © 2026<br>
+      São José - SC • CNPJ 47.558.493/0001-43
+    </p>
+  </footer>
+
+  <!-- BOTÃO WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/5548998049084" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar no WhatsApp">
+    <img src="https://play-lh.googleusercontent.com/K6L_Ixmw0J9oTktAoHyEHvzQIfxEF1CIQ5aE0WHhdUeOgfAmn7KLhe47Q5XxZaXQ0g=w240-h480-rw" alt="WhatsApp" loading="eager" decoding="async">
+  </a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // ELEMENTS
+      const heroText = document.getElementById('hero-text');
+      const legalPopup = document.getElementById('legal-popup');
+      const legalAccept = document.getElementById('legal-accept');
+      const navToggle = document.querySelector('.nav-toggle');
+      const primaryNav = document.getElementById('primary-nav');
+      const faqButtons = Array.from(document.querySelectorAll('.faq-question'));
+      const animateEls = Array.from(document.querySelectorAll('.animate'));
+
+      // HERO ROTATION (textos em português)
+      (function heroRotate(){
+        const textos = [
+          'Assistência técnica especializada em celulares Android e iOS em <span>Florianópolis e região</span>',
+          '<span>Serviços rápidos:</span> troca de tela, troca de bateria, troca de conector de carga — realizados aonde você estiver.',
+          'Assistência especializada em notebooks e MacBooks — atendimento a domicílio e em laboratório.',
+          '<span>Upgrades e manutenção:</span> SSD, memória, formatação, limpeza preventiva e reparos avançados.',
+          'Profissionais capacitados, atendimento rápido e transparente — resolva seu problema sem sair de casa.'
+        ];
+        let i = 0;
+        function next(){
+          i = (i + 1) % textos.length;
+          heroText.classList.remove('hero-flash');
+          void heroText.offsetWidth; // reflow for animation restart
+          heroText.classList.add('hero-flash');
+          heroText.innerHTML = textos[i];
+        }
+        // first rotation after 5s, then every 5s
+        setInterval(next, 5000);
+      })();
+
+      // LEGAL POPUP (localStorage)
+      if (!localStorage.getItem('legalAccepted')) {
+        legalPopup.style.display = 'flex';
+        legalPopup.setAttribute('aria-hidden', 'false');
+      } else {
+        legalPopup.style.display = 'none';
+        legalPopup.setAttribute('aria-hidden', 'true');
+      }
+      legalAccept && legalAccept.addEventListener('click', function () {
+        localStorage.setItem('legalAccepted', 'true');
+        legalPopup.style.display = 'none';
+        legalPopup.setAttribute('aria-hidden', 'true');
       });
 
-      // Abre o clicado
-      if (!isOpen) {
-        this.setAttribute('aria-expanded', 'true');
-        const answer = this.nextElementSibling;
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        this.querySelector('.faq-icon').textContent = '−';
+      // NAV TOGGLE MOBILE
+      if (navToggle && primaryNav) {
+        const openNav = () => { primaryNav.classList.add('open'); navToggle.setAttribute('aria-expanded','true'); };
+        const closeNav = () => { primaryNav.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); };
+        navToggle.addEventListener('click',()=> primaryNav.classList.contains('open') ? closeNav() : openNav());
+
+        // close nav on link click (mobile) and outside click or Escape
+        primaryNav.querySelectorAll('a').forEach(a=>{
+          a.addEventListener('click', ()=> { if (window.innerWidth <= 900) closeNav(); });
+        });
+        document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') closeNav(); });
+        document.addEventListener('click', (e)=> {
+          if (window.innerWidth <= 900 && primaryNav.classList.contains('open') && !primaryNav.contains(e.target) && !navToggle.contains(e.target)) {
+            closeNav();
+          }
+        });
+        window.addEventListener('resize', ()=> { if (window.innerWidth > 900) closeNav(); });
       }
-    });
-  });
-});
-</script>
 
+      // FAQ accordion
+      faqButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          // close all
+          faqButtons.forEach(b => {
+            b.setAttribute('aria-expanded', 'false');
+            const ans = document.getElementById(b.getAttribute('aria-controls'));
+            if (ans) ans.style.maxHeight = null;
+            const icon = b.querySelector('.faq-icon');
+            if (icon) icon.textContent = '+';
+          });
+          // open if was closed
+          if (!expanded) {
+            this.setAttribute('aria-expanded', 'true');
+            const answer = document.getElementById(this.getAttribute('aria-controls'));
+            if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+            const icon = this.querySelector('.faq-icon');
+            if (icon) icon.textContent = '−';
+          }
+        });
+      });
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("legal-popup");
-  const acceptBtn = document.getElementById("legal-accept");
+      // IntersectionObserver for animations & scrollspy
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.12 });
 
-  if (!localStorage.getItem("legalAccepted")) {
-    popup.style.display = "flex";
-    popup.setAttribute("aria-hidden", "false");
-  } else {
-    popup.style.display = "none";
-  }
+      animateEls.forEach(el => observer.observe(el));
 
-  acceptBtn.addEventListener("click", () => {
-    localStorage.setItem("legalAccepted", "true");
-    popup.style.display = "none";
-    popup.setAttribute("aria-hidden", "true");
-  });
-});
-</script>
+      // Smooth scroll with header offset for internal nav links
+      const navLinks = Array.from(document.querySelectorAll('.primary-nav a[href^="#"]'));
+      navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          const hash = this.getAttribute('href');
+          if (hash && hash.startsWith('#') && document.querySelector(hash)) {
+            e.preventDefault();
+            const target = document.querySelector(hash);
+            const headerHeight = document.querySelector('header').offsetHeight || 0;
+            const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 8;
+            window.scrollTo({ top, behavior: 'smooth' });
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            if (window.innerWidth <= 900 && primaryNav.classList.contains('open')) {
+              primaryNav.classList.remove('open');
+              navToggle.setAttribute('aria-expanded','false');
+            }
+          }
+        });
+      });
 
+      // SECTION OBSERVER for scrollspy
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = document.querySelector('.primary-nav a[href="#' + id + '"]');
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -55% 0px', threshold: 0.15 });
+      sections.forEach(s => sectionObserver.observe(s));
 
-  <!-- POPUP AVISO LEGAL -->
-<div id="legal-popup" class="legal-overlay" aria-hidden="true">
-  <div class="legal-modal" role="dialog" aria-labelledby="legal-title" aria-modal="true">
-    <h2 id="legal-title">Aviso Legal</h2>
-
-    <p>
-      A <strong>Tech Mobile Floripa</strong> é uma empresa independente, especializada na prestação de serviços de diagnóstico, reparo em aparelhos Android, iOS, MacOS e Windows. Não possuimos vínculos com nenhuma marca ou fabricante, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos. Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais em laboratorios independentes e técnicos especializados.
-    </p>
-
-    <button id="legal-accept" class="legal-btn">
-      Entendi e continuar
-    </button>
-  </div>
-</div>
-
-<header>
-  <div class="header-wrap">
-      <div class="brand">
-        <h1>
-          <a href="/" class="brand-link" aria-label="Ir para página inicial">
-            <img src="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" alt="Tech Mobile Floripa" class="brand-logo" loading="eager" decoding="async">
-          </a>
-        </h1>
-      </div>
-      <!-- Hamburger menu toggle (visible on small screens) -->
-      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu">
-        <span class="hamburger" aria-hidden="true"></span>
-      </button>
-    <nav id="primary-nav" class="primary-nav">
-      <a href="#servicos">Serviços</a>
-      <a href="#como">Como funciona</a>
-      <a href="#Perguntas frequentes">Perguntas frequentes</a>
-      <a href="#depoimentos">Avaliações</a>
-      <a href="#Quem Somos">Quem Somos</a>
-      <a href="#Aviso Legal">Aviso Legal</a>
-      <a href="#Contato">Contato</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero animate">
-  <div class="hero-inner">
-    <h2 id="hero-text">
-  <span>Serviços especializados</span> em aparelhos Android e iOS em
-  <span>Florianópolis e Região</span></h2>
-  </div>
-</section>
-
-<section id="carrossel" class="carousel-section animate" role="region" aria-label="Carrossel de serviços">
-  <div class="carousel">
-    <div class="carousel-track">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/telaquebradasamsung.jpg?raw=true" alt="Serviço - Foto 1" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia_tecnica_macbook_brasilia_aguas_claras_1080x.jpg?raw=true" alt="Serviço - Foto 2" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/vidrotraseiroquebradoiphone.jpg?raw=true" alt="Serviço - Foto 3" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia%20notebook.jpg?raw=true" alt="Serviço - Foto 4" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/vidrotraseiroquebradoiphone.jpg?raw=true" alt="Serviço - Foto 6" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/imagensdeservi-os/blob/main/reparo%20em%20mac.jpg?raw=true" alt="Serviço - Foto 7" loading="lazy" decoding="async">
-
-    </div>
-  </div>
-  <noscript><p style="text-align:center;color:var(--muted)">Ative o JavaScript para ver o carrossel.</p></noscript>
-</section>
-
-<section id="servicos">
-  <h2 class="animate">Serviços</br></h2>
-  <div class="grid">
-    <div class="card animate delay-1" tabindex="0">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/telaquebrada.jpg?raw=true" alt="Troca de telas" loading="lazy" decoding="async">
-      <div class="card-content">
-        <span class="badge">Serviços rápidos</br></span>
-        <h3>Celulares Android e Iphones</h3>
-        <p>Troca de tela - Troca de bateria - Troca de conector de carga - Troca de vidro traseiro - Serviços de software.</p>
-      </div>
-    </div>
-
-    <div class="card animate delay-2" tabindex="0">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/consertoplacacelular.jpg?raw=true" alt="Reparo em placa" loading="lazy" decoding="async">
-      <div class="card-content">
-        <span class="badge">Serviços avançados para celular</br></span>
-        <h3>Reparo em Placa de celulares android e Iphone</br></h3>
-        <p>Somos especializados em reparos avançados em placas de celulares</br></p>
-      </div>
-    </div>
-
-    <div class="card animate delay-3" tabindex="0">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/notebook%20conserto%20placa.jpg?raw=true" alt="Serviços multimarcas" loading="lazy" decoding="async">
-      <div class="card-content">
-        <span class="badge">Serviços avançados para Notebook</br></span>
-        <h3>Reparo em placa de Notebook e Macbook</br></h3>
-        <p>Somos especializados em reparo avançado em placas de notebooks</br></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="como" class="highlight">
-  <h2 class="animate">Como funciona?</h2>
-  <div class="steps">
-    <div class="step animate delay-1">Você solicita o orçamento gratuito via WhatsApp.</div>
-    <div class="step animate delay-2">verificamos se o serviço pode ser realizado no local ou no laborátorio.</div>
-    <div class="step animate delay-3">Agendamos o horário de atendimento exclusivo para você.</div>
-    <div class="step animate delay-3">Consertamos no local, Se necessário buscamos e entregamos sem custo adicional.</div>
-  </div>
-</section>
-
-<section id="perguntas-frequentes" class="faq">
-  <h2 class="faq-title">Perguntas frequentes</h2>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Quanto tempo leva para consertar meu celular em casa?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        O tempo varia conforme o problema. Muitos consertos simples são realizados
-        em menos de 1 hora. Para serviços mais complexos, informamos o prazo após
-        o diagnóstico inicial.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Qual o custo da visita técnica?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        A visita técnica para diagnóstico é <strong>gratuita</strong> caso você
-        opte por realizar o conserto conosco.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Quais são as formas de pagamento disponíveis?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        Aceitamos Pix, cartão de crédito em até <strong>10x sem juros</strong>,
-        cartão de débito e dinheiro.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Vocês atendem apenas a domicílio?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        Não. Além do atendimento em domicílio, também realizamos consertos em nosso
-        laboratório localizado em Florianópolis.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Qual é a garantia do serviço?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        A garantia varia conforme o tipo de serviço e o aparelho consertado,
-        podendo ir de <strong>3 meses a 1 ano</strong>.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" aria-expanded="false">
-      Quanto tempo leva um conserto em garantia?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>
-        Normalmente realizamos o conserto em garantia em até
-        <strong>24 horas</strong> após a solicitação.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- DEPOIMENTOS -->
-<section id="depoimentos" class="testimonials animate" role="region" aria-labelledby="depoimentos-heading">
-
-  <h2 id="depoimentos-heading" style="text-align:center;">
-    Veja o que dizem nossos clientes</br>
-  </h2>
-
-  <!-- BLOCO CENTRAL DE AVALIAÇÃO GOOGLE -->
-  <div class="google-review-box">
-  <p>
-    Já utilizou nossos serviços?<br>
-    <strong>Escaneie o QR Code e avalie a Tech Mobile Floripa no Google</strong>
-  </p>
-
-  <img
-    src="https://github.com/techmobilesolucoes/Home/blob/main/qr%20code%20avalia%C3%A7%C3%A3o%20do%20google.png?raw=true"
-    alt="QR Code para avaliação no Google da Tech Mobile Floripa"
-    loading="lazy"
-    decoding="async"
-    width="160"
-    height="160"
-  >
-
-  <a
-    href="https://g.page/r/CZaiGYPVZQ7YEBM/review"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="review-button"
-    role="button"
-    aria-label="Avaliar a Tech Mobile Floripa no Google"
-  >
-    Avaliar no Google ⭐
-  </a>
-</div>
-
-
-  <!-- GRID DE DEPOIMENTOS -->
-  <div class="grid">
-
-    <!-- DEPOIMENTO 1 -->
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Victor Bentos">
-      <meta itemprop="datePublished" content="2025-01-01">
-
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-
-      <p itemprop="reviewBody">
-        Veio até minha casa e para minha surpresa me mostrou que o problema do meu telefone era muito mais simples do que eu esperava, consertando na hora. Pela honestidade, transparência e profissionalismo, indico totalmente.
-      </p>
-
-      <div class="meta">
-        <span itemprop="author">Victor Bentos</span>
-      </div>
-
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <!-- DEPOIMENTO 2 -->
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Abigail Vaccaro">
-      <meta itemprop="datePublished" content="2025-01-02">
-
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-
-      <p itemprop="reviewBody">
-        Excelente profissional, de confiança. Levou nossos aparelhos e realizou o serviço no mesmo dia. Indico e confio! Obrigada pelo atendimento.
-      </p>
-
-      <div class="meta">
-        <span itemprop="author">Abigail Vaccaro</span>
-      </div>
-
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <!-- DEPOIMENTO 3 -->
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Paulo Bossle">
-      <meta itemprop="datePublished" content="2025-01-03">
-
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-
-      <p itemprop="reviewBody">
-        Precisei de atendimento na minha loja, a experiência foi incrível. No mesmo dia já agendei outro serviço para meu computador pessoal. Serviço de qualidade e profissional.
-      </p>
-
-      <div class="meta">
-        <span itemprop="author">Paulo Bossle</span>
-      </div>
-
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<section id="Quem Somos" class="cta">
-  <h2 class="animate">Quem Somos</h2>
-  <p class="animate">Somos a Tech Mobile Floripa Assistência Técnica
-     Criada para oferecer soluções completas, seguras e eficientes em tecnologia</br>
-     Uma empresa especializada em conserto de celulares, notebooks e computadores, atendemos todas as marcas e modelos</br>
-     Atendemos a domicílio, unindo conhecimento técnico avançado, transparência e atendimento de alto padrão</br>
-  </p>
-</section>
-
-<section id="Aviso Legal" class="cta">
-  <h2 class="animate">Aviso Legal</h2>
-  <p class="animate"><p>
-      A <strong>Tech Mobile Floripa</strong> é uma empresa especializada em assistência técnica especiliazada em</br>
-      Serviços avançados de smartphones, notebooks e computadores de todas as marcas e modelos</br>
-      Não possuimos vínculo, afiliação, autorização ou representação oficial com nenhum fabricante ou quaisquer outras marcas mencionadas em nosso site</br>
-      Todas as marcas, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos</br>
-      Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais</br>
-
-
-</p>
-</section>
-
-<section id="Contato" class="cta">
-  <h2 class="animate">Contato</h2>
-  <p class="animate">Entre em contato conosco pelo WhatsApp ou ligação.</br>
-    Telefone: (48) 99804-9084</br>
-    Email: techmobilefloripa@gmail.com</br>
-  </p>
-</section>
-
-<footer>
-  <p>
-    <strong>Tech Mobile Floripa Assistência Técnica de Celulares e Notebooks</strong> © 2026 – <br>
-    São José - SC - CNPJ47.558.493/0001-43 <br>
-  </p>
-</footer>
-<!-- BOTÃO WHATSAPP FLUTUANTE -->
-<a href="https://wa.me/5548998049084"
-   target="_blank"
-   rel="noopener noreferrer"
-   title="Abrir conversa no WhatsApp"
-   class="whatsapp-float"
-   aria-label="Falar no WhatsApp">
-  <img src="https://play-lh.googleusercontent.com/K6L_Ixmw0J9oTktAoHyEHvzQIfxEF1CIQ5aE0WHhdUeOgfAmn7KLhe47Q5XxZaXQ0g=w240-h480-rw" alt="WhatsApp" class="whatsapp-icon" loading="eager" decoding="async">
-</a>
-
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("show");
-      }
-    });
-  },{threshold:0.15});
-
-  document.querySelectorAll(".animate").forEach(el=>{
-    observer.observe(el);
-  });
-
-  // Mobile navigation toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const primaryNav = document.getElementById('primary-nav');
-  if(navToggle && primaryNav){
-    const closeNav = ()=>{
-      primaryNav.classList.remove('open');
-      navToggle.setAttribute('aria-expanded','false');
-    };
-    const openNav = ()=>{
-      primaryNav.classList.add('open');
-      navToggle.setAttribute('aria-expanded','true');
-    };
-    navToggle.addEventListener('click',()=>{
-      if(primaryNav.classList.contains('open')) closeNav(); else openNav();
-    });
-
-    // Close when clicking a link (mobile) and on Escape
-    primaryNav.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click',()=>{ if(window.innerWidth<=900) closeNav(); });
-    });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
-    window.addEventListener('resize',()=>{ if(window.innerWidth>900) closeNav(); });
-    // Close if clicking outside of the nav on mobile
-    document.addEventListener('click',e=>{
-      if(window.innerWidth<=900 && primaryNav.classList.contains('open')){
-        if(!primaryNav.contains(e.target) && !navToggle.contains(e.target)) closeNav();
-      }
-    });
-  }
-
-  // Smooth scroll with header offset for primary nav links
-  const navLinks = document.querySelectorAll('.primary-nav a[href^="#"]');
-  navLinks.forEach(link=>{
-    link.addEventListener('click',function(e){
-      const hash = this.getAttribute('href');
-      if(hash && hash.startsWith('#') && document.querySelector(hash)){
-        e.preventDefault();
-        const target = document.querySelector(hash);
-        const headerHeight = document.querySelector('header').offsetHeight;
-        const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
-        window.scrollTo({top, behavior:'smooth'});
-        // give immediate visual feedback
-        navLinks.forEach(l=>l.classList.remove('active'));
-        this.classList.add('active');
-        // close mobile nav if open
-        if(window.innerWidth <= 900 && primaryNav.classList.contains('open')){
-          primaryNav.classList.remove('open');
-          navToggle.setAttribute('aria-expanded','false');
+      // set initial active link
+      setTimeout(()=>{
+        const firstVisible = sections.find(s => {
+          const rect = s.getBoundingClientRect();
+          return rect.top <= (window.innerHeight/2) && rect.bottom > (window.innerHeight/2);
+        });
+        if (firstVisible) {
+          const link = document.querySelector('.primary-nav a[href="#' + firstVisible.id + '"]');
+          if (link) navLinks.forEach(l => l.classList.remove('active')) || link.classList.add('active');
         }
-      }
+      }, 120);
     });
-  });
-
-  // Scrollspy - mark the nav item active for the section visible on screen
-  const sections = document.querySelectorAll('section[id]');
-  const sectionObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      const id = entry.target.getAttribute('id');
-      const link = document.querySelector('.primary-nav a[href="#'+id+'"]');
-      if(entry.isIntersecting){
-        navLinks.forEach(l=>l.classList.remove('active'));
-        if(link) link.classList.add('active');
-      }
-    });
-  },{root:null, rootMargin:'0px 0px -60% 0px', threshold:0.15});
-  sections.forEach(s=>sectionObserver.observe(s));
-
-  // Set initial active link on load (in case some section is already in view)
-  setTimeout(()=>{
-    const firstVisible = Array.from(sections).find(s=>{
-      const rect = s.getBoundingClientRect();
-      return rect.top <= (window.innerHeight/2) && rect.bottom > (window.innerHeight/2);
-    });
-    if(firstVisible){
-      const link = document.querySelector('.primary-nav a[href="#'+firstVisible.id+'"]');
-      if(link){ navLinks.forEach(l=>l.classList.remove('active')); link.classList.add('active'); }
-    }
-  },120);
-
-});
-</script>
-
+  </script>
 </body>
 </html>
-
-
-
