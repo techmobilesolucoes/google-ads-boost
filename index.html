@@ -10,7 +10,11 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" type="image/jpeg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/techmobilesolucoes/paginacapturawhatsapp/blob/main/favicon.jpg?raw=true" type="image/jpeg">
+  <link rel="shortcut icon" href="/favicon.jpg" type="image/jpeg"><!-- fallback local -->
+  <link rel="apple-touch-icon" href="/favicon.jpg">
 
   <style>
     :root{
@@ -23,7 +27,23 @@
       --radius: 18px;
       --max-width: 1200px;
       --header-height: 84px;
+
+      /* Animation tuning */
+      --anim-duration: 520ms;
+      --anim-easing: cubic-bezier(.2,.9,.2,1);
+      --stagger-step: 80ms;
+      --card-hover-rise: -8px;
     }
+
+    /* Respect user preference for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --anim-duration: 1ms;
+        --stagger-step: 0ms;
+      }
+      * { scroll-behavior: auto; }
+    }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -35,6 +55,7 @@
       -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
       line-height:1.45;
+      -webkit-font-smoothing:antialiased;
     }
 
     /* UTIL */
@@ -66,12 +87,8 @@
       object-fit:contain;
       display:block;
     }
-    .brand-slogan{
-      font-size:16px;
-      color:var(--muted);
-      font-weight:700;
-    }
 
+    /* NAV - subtle underline animation */
     nav{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
     nav a{
       color:var(--muted);
@@ -79,14 +96,16 @@
       font-size:14px;
       padding:8px 10px;
       border-radius:8px;
-      transition:all .15s ease;
+      transition:color .18s var(--anim-easing), background .18s var(--anim-easing), transform .18s var(--anim-easing);
       position:relative;
+      will-change:transform,color;
     }
-    nav a:focus, nav a:hover{outline:3px solid rgba(29,211,176,.18);outline-offset:3px;color:#fff;background:rgba(29,211,176,.03)}
+    nav a:focus, nav a:hover{outline:3px solid rgba(29,211,176,.12);outline-offset:3px;color:#fff;background:rgba(29,211,176,.03)}
     nav a::after{
       content:'';
       position:absolute;
-      left:12px;right:12px;bottom:6px;height:4px;background:var(--primary);border-radius:4px;transform:scaleX(0);transform-origin:center;transition:transform .18s ease;
+      left:12px;right:12px;bottom:6px;height:4px;background:var(--primary);border-radius:4px;transform:scaleX(0);transform-origin:center;transition:transform .28s var(--anim-easing);
+      will-change:transform;
     }
     nav a.active::after{transform:scaleX(1)}
     nav a.active{color:#fff}
@@ -107,7 +126,7 @@
     }
 
     /* BUTTONS */
-    .btn{display:inline-block;padding:12px 28px;border-radius:999px;font-weight:700;text-decoration:none}
+    .btn{display:inline-block;padding:12px 28px;border-radius:999px;font-weight:700;text-decoration:none;transition:transform .22s var(--anim-easing), box-shadow .22s var(--anim-easing);will-change:transform}
     .btn-whatsapp{background:var(--whatsapp);color:#012226;box-shadow:0 12px 30px rgba(37,211,102,.28)}
     .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 20px 48px rgba(37,211,102,.46)}
 
@@ -118,12 +137,24 @@
       background:
         linear-gradient(180deg, rgba(5,11,16,.62), rgba(5,11,16,.9)),
         url('https://github.com/techmobilesolucoes/Home/blob/main/laboratorio.jpg?raw=true') center/cover no-repeat;
-      background-attachment: scroll; /* avoid fixed on mobile */
+      background-attachment: scroll;
+      overflow:hidden;
+      position:relative;
     }
-    .hero-inner{max-width:920px;margin:0 auto}
-    .hero h2{font-size:36px;font-weight:800;margin:0;color:#fff}
+    .hero-inner{
+      max-width:920px;margin:0 auto;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform;
+    }
+    .hero h2{font-size:36px;font-weight:800;margin:0;color:#fff;display:inline-block}
     .hero h2 span{color:var(--primary)}
     .hero p{color:var(--muted);margin:14px 0 0}
+
+    /* subtle hero flash used when rotating hero text */
+    .hero-flash{animation:heroFlash .62s var(--anim-easing) both}
+    @keyframes heroFlash {
+      0%{opacity:.12; transform:translateY(6px) scale(.998)}
+      45%{opacity:1; transform:none}
+      100%{opacity:1; transform:none}
+    }
 
     @media (max-width:600px){
       .hero{padding:48px 14px}
@@ -135,13 +166,25 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 
     /* CARDS */
-    .card{background:linear-gradient(180deg,#07131a,#041018);border-radius:14px;border:1px solid rgba(255,255,255,.04);overflow:hidden;transition:transform .32s ease,box-shadow .32s ease}
-    .card:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.6)}
+    .card{
+      background:linear-gradient(180deg,#07131a,#041018);
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.04);
+      overflow:hidden;
+      transition:transform .32s var(--anim-easing), box-shadow .32s var(--anim-easing);
+      will-change:transform,box-shadow;
+      transform-origin:center;
+      cursor:default;
+    }
+    .card:hover{transform:translateY(calc(var(--card-hover-rise))) scale(1.01);box-shadow:0 28px 64px rgba(0,0,0,.6)}
     .card img{width:100%;height:160px;object-fit:cover;display:block}
     .card-content{padding:22px}
     .card h3{margin:6px 0 6px;color:#fff}
     .card p{color:var(--muted);margin:0;font-size:14px}
     .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(29,211,176,.12);color:var(--primary);font-size:12px;margin-bottom:8px}
+
+    /* tilt transform applied via JS for pointer devices */
+    .card.tilt{transition:box-shadow .22s var(--anim-easing), transform .12s linear}
 
     /* COMO FUNCIONA */
     .highlight{background:linear-gradient(135deg,rgba(29,211,176,.06),rgba(11,94,215,.04));border-radius:14px;padding:30px}
@@ -176,12 +219,30 @@
     /* CTA, footer and whatsapp */
     .cta{text-align:center}
     footer{text-align:center;padding:28px 18px;font-size:13px;color:var(--muted);border-top:1px solid rgba(255,255,255,.04)}
-    .whatsapp-float{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border-radius:50%;background:var(--whatsapp);color:#012226;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 18px 36px rgba(37,211,102,.35);z-index:999}
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border-radius:50%;background:var(--whatsapp);color:#012226;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 18px 36px rgba(37,211,102,.35);z-index:999;transition:transform .18s var(--anim-easing), box-shadow .18s var(--anim-easing);will-change:transform}
+    .whatsapp-float:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(37,211,102,.42)}
     .whatsapp-float img{width:28px;height:28px;display:block;border-radius:50%}
 
+    /* ANIMATION / REVEAL ON SCROLL (lightweight) */
+    .animate{
+      opacity:0;
+      transform:translateY(18px) scale(.995);
+      transition: opacity var(--anim-duration) var(--anim-easing), transform var(--anim-duration) var(--anim-easing);
+      will-change:opacity,transform;
+    }
+    .animate.show{
+      opacity:1;
+      transform:none;
+    }
+
     /* small adjustments */
-    .animate{opacity:0;transform:translateY(18px) scale(.99);transition:opacity .7s ease,transform .7s ease}
-    .animate.show{opacity:1;transform:none}
+    .animate.show-slight{opacity:1; transform:translateY(0) scale(1)}
+    .animate-quick{transition-duration: calc(var(--anim-duration) * .7)}
+
+    /* prefer-reduced-motion fallback */
+    @media (prefers-reduced-motion: reduce) {
+      .animate, .card, .hero-inner, .whatsapp-float { transition: none !important; animation: none !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -426,7 +487,10 @@
         <a href="tel:+5548998049084" style="color:var(--primary);font-weight:700;text-decoration:none"> (48) 99804-9084</a><br>
         <a href="mailto:techmobilefloripa@gmail.com" style="color:var(--muted);text-decoration:none">techmobilefloripa@gmail.com</a>
       </p>
-      <p style="margin-top:8px"><a class="btn btn-whatsapp" href="https://wa.me/5548998049084" target="_blank" rel="noopener noreferrer">Abrir conversa no WhatsApp</a></p>
+      <p style="margin-top:8px">
+        <!-- Link atualizado para abrir WhatsApp já com mensagem pré-preenchida -->
+        <a class="btn btn-whatsapp" href="https://wa.me/5548998049084?text=Ol%C3%A1%2C%20vim%20do%20site%2C%20preciso%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer">Abrir conversa no WhatsApp</a>
+      </p>
     </section>
   </main>
 
@@ -438,7 +502,7 @@
   </footer>
 
   <!-- BOTÃO WHATSAPP FLUTUANTE -->
-  <a href="https://wa.me/5548998049084" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar no WhatsApp">
+  <a href="https://wa.me/5548998049084?text=Ol%C3%A1%2C%20vim%20do%20site%2C%20preciso%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar no WhatsApp">
     <img src="https://play-lh.googleusercontent.com/K6L_Ixmw0J9oTktAoHyEHvzQIfxEF1CIQ5aE0WHhdUeOgfAmn7KLhe47Q5XxZaXQ0g=w240-h480-rw" alt="WhatsApp" loading="eager" decoding="async">
   </a>
 
@@ -452,6 +516,16 @@
       const primaryNav = document.getElementById('primary-nav');
       const faqButtons = Array.from(document.querySelectorAll('.faq-question'));
       const animateEls = Array.from(document.querySelectorAll('.animate'));
+      const heroInner = document.querySelector('.hero-inner');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // STAGGER: apply small transition delays for a professional reveal (respects reduced-motion)
+      if (!prefersReduced) {
+        animateEls.forEach((el, i) => {
+          const delay = Math.min(600, i * 80); // cap total delay
+          el.style.transitionDelay = delay + 'ms';
+        });
+      }
 
       // HERO ROTATION (textos em português)
       (function heroRotate(){
@@ -471,7 +545,7 @@
           heroText.innerHTML = textos[i];
         }
         // first rotation after 5s, then every 5s
-        setInterval(next, 5000);
+        if (!prefersReduced) setInterval(next, 5000);
       })();
 
       // LEGAL POPUP (localStorage)
@@ -530,7 +604,7 @@
         });
       });
 
-      // IntersectionObserver for animations & scrollspy
+      // IntersectionObserver for animations & scrollspy (lightweight)
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('show');
@@ -585,6 +659,70 @@
           if (link) navLinks.forEach(l => l.classList.remove('active')) || link.classList.add('active');
         }
       }, 120);
+
+      // PARALLAX HERO (light and rAF-based) - disabled on small screens / reduced-motion
+      if (!prefersReduced && window.innerWidth > 900 && heroInner) {
+        let ticking = false;
+        function onScrollParallax() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              const sc = window.scrollY || window.pageYOffset;
+              // small offset capped for subtle effect
+              const offset = Math.max(0, Math.min(60, sc * 0.08));
+              heroInner.style.transform = `translateY(${offset}px)`;
+              ticking = false;
+            });
+          }
+        }
+        window.addEventListener('scroll', onScrollParallax, { passive: true });
+        // reset on resize
+        window.addEventListener('resize', () => { if (window.innerWidth <= 900) heroInner.style.transform = ''; }, { passive: true });
+      }
+
+      // CARD TILT (only for pointer: fine and non reduced motion) - lightweight using rAF and small angles
+      const prefersPointerFine = window.matchMedia('(pointer: fine)').matches;
+      if (!prefersReduced && prefersPointerFine) {
+        const cards = Array.from(document.querySelectorAll('.card'));
+        cards.forEach(card => {
+          let rect = null;
+          let rafId = null;
+
+          function handleMove(e) {
+            if (!rect) rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            // small rotation range
+            const ry = (x - cx) / cx * -6; // rotateY
+            const rx = (y - cy) / cy * 6;  // rotateX
+            // apply transform via rAF to avoid layout thrash
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              card.classList.add('tilt');
+              card.style.transform = `translateY(calc(var(--card-hover-rise))) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.01)`;
+            });
+          }
+
+          function handleLeave() {
+            if (rafId) cancelAnimationFrame(rafId);
+            card.style.transform = '';
+            card.classList.remove('tilt');
+            rect = null;
+          }
+
+          card.addEventListener('pointermove', handleMove, { passive: true });
+          card.addEventListener('pointerleave', handleLeave);
+          card.addEventListener('pointercancel', handleLeave);
+        });
+      }
+
+      // Accessibility: reduce animations if user explicitly prefers
+      if (prefersReduced) {
+        document.querySelectorAll('.animate').forEach(el => el.classList.add('show'));
+      }
+
     });
   </script>
 </body>
